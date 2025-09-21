@@ -1,6 +1,6 @@
 ﻿namespace Massive.QoL
 {
-	public class System : ISystem
+	public class SystemBase : ISystem
 	{
 		public World World { get; set; }
 	}

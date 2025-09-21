@@ -1,8 +1,6 @@
-﻿using NotImplementedException = System.NotImplementedException;
-
-namespace Massive.QoL.Samples
+﻿namespace Massive.QoL.Samples
 {
-	public class DamageSystem : System, IUpdate, IInitinalize
+	public class DamageSystem : SystemBase, IUpdate, IInitinalize
 	{
 		private BitSet TakeDamageSelf;
 

@@ -1,6 +1,6 @@
 ﻿namespace Massive.QoL.Samples
 {
-	public class HealingBuffSystem : System, IUpdate
+	public class HealingBuffSystem : SystemBase, IUpdate
 	{
 		public void Update()
 		{

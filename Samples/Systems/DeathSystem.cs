@@ -1,6 +1,6 @@
 ﻿namespace Massive.QoL.Samples
 {
-	public class DeathSystem : System, IUpdate
+	public class DeathSystem : SystemBase, IUpdate
 	{
 		public void Update()
 		{

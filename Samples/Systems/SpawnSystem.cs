@@ -1,8 +1,6 @@
-﻿using NotImplementedException = System.NotImplementedException;
-
-namespace Massive.QoL.Samples
+﻿namespace Massive.QoL.Samples
 {
-	public class SpawnSystem : System, IFirstTick
+	public class SpawnSystem : SystemBase, IFirstTick
 	{
 		private readonly int _spawnAmount;
 
