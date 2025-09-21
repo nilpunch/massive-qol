@@ -1,6 +1,4 @@
-﻿using NotImplementedException = System.NotImplementedException;
-
-namespace Massive.QoL.Samples
+﻿namespace Massive.QoL.Samples
 {
 	public class Program
 	{
