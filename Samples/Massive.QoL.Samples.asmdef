@@ -1,0 +1,17 @@
+{
+    "name": "Massive.QoL.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cf2e24c64a0d02f4690b9be74f35390f",
+        "GUID:94bf3779025536c48b3ac6ad9628555b"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
