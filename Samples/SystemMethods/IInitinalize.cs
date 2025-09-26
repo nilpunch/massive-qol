@@ -1,9 +1,9 @@
 ﻿namespace Massive.QoL.Samples
 {
-	public interface IInitinalize : IRunMethod<IInitinalize>
+	public interface IInitinalize : ISystemMethod<IInitinalize>
 	{
 		void Initialize();
 
-		void IRunMethod<IInitinalize>.Run() => Initialize();
+		void ISystemMethod<IInitinalize>.Run() => Initialize();
 	}
 }

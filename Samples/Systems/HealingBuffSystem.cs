@@ -2,7 +2,7 @@
 {
 	public class HealingBuffSystem : SystemBase, IUpdate
 	{
-		public void Update()
+		public void Update(float deltaTime)
 		{
 			World.Include<HealingBuff>().ForEach((ref Health health) =>
 			{

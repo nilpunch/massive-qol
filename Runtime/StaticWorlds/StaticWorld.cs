@@ -6,7 +6,7 @@ namespace Massive.QoL
 	public class StaticWorld<TWorldType>
 	{
 		// ReSharper disable once StaticMemberInGenericType
-		public static readonly World Instance;
+		public static World Instance;
 
 		static StaticWorld()
 		{

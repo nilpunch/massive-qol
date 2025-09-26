@@ -1,35 +1,35 @@
 ﻿namespace Massive.QoL
 {
-	public class FeatureFactory
+	public class SystemsBuilder
 	{
 		private readonly FastList<ISystemFactory> _systemFactories = new FastList<ISystemFactory>();
 
-		public FeatureFactory AddFactory(ISystemFactory systemFactory)
+		public SystemsBuilder Factory(ISystemFactory systemFactory)
 		{
 			_systemFactories.Add(systemFactory);
 			return this;
 		}
 
-		public FeatureFactory AddNew<T>() where T : ISystem, new()
+		public SystemsBuilder New<T>() where T : ISystem, new()
 		{
 			_systemFactories.Add(new NewSystemFactory<T>());
 			return this;
 		}
 
-		public FeatureFactory AddInstance(ISystem system)
+		public SystemsBuilder Instance(ISystem system)
 		{
 			_systemFactories.Add(new InstanceSystemFactory(system));
 			return this;
 		}
 
-		public Feature CreateFeature(World world)
+		public Systems Build(World world)
 		{
-			var feature = new Feature(world);
+			var systems = new Systems(world);
 			foreach (var systemFactory in _systemFactories)
 			{
-				feature.AddSystem(systemFactory.Create());
+				systems.AddSystem(systemFactory.Create());
 			}
-			return feature;
+			return systems;
 		}
 	}
 }

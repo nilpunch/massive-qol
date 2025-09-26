@@ -2,7 +2,7 @@
 {
 	public class DeathSystem : SystemBase, IUpdate
 	{
-		public void Update()
+		public void Update(float deltaTime)
 		{
 			World.ForEach((Entity entity, ref Health health) =>
 			{

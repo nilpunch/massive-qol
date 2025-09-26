@@ -9,7 +9,7 @@
 			TakeDamageSelf = World.BitSet<TakeDamageSelf>();
 		}
 
-		public void Update()
+		public void Update(float deltaTime)
 		{
 			World.ForEach(this, (int entityId, ref Health health, ref TakeDamageSelf damageSelf, DamageSystem system) =>
 			{

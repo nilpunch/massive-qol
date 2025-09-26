@@ -1,9 +1,9 @@
 ﻿namespace Massive.QoL.Samples
 {
-	public interface IUpdate : IRunMethod<IUpdate>
+	public interface IUpdate : ISystemMethod<IUpdate, float>
 	{
-		void Update();
+		void Update(float deltaTime);
 
-		void IRunMethod<IUpdate>.Run() => Update();
+		void ISystemMethod<IUpdate, float>.Run(float deltaTime) => Update(deltaTime);
 	}
 }

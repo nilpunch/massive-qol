@@ -1,9 +1,9 @@
 ﻿namespace Massive.QoL.Samples
 {
-	public interface IFirstTick : IRunMethod<IFirstTick>
+	public interface IFirstTick : ISystemMethod<IFirstTick>
 	{
 		void FirstTick();
 
-		void IRunMethod<IFirstTick>.Run() => FirstTick();
+		void ISystemMethod<IFirstTick>.Run() => FirstTick();
 	}
 }

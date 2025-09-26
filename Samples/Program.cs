@@ -2,28 +2,30 @@
 {
 	public class Program
 	{
-		private readonly Feature _damageFeature;
+		private readonly Systems _systems;
 
 		public Program()
 		{
-			_damageFeature = new FeatureFactory()
-				.AddInstance(new SpawnSystem(spawnAmount: 20))
-				.AddNew<DamageSystem>()
-				.AddNew<HealingBuffSystem>()
-				.AddNew<DeathSystem>()
-				.CreateFeature(new World());
+			_systems = new SystemsBuilder()
+				.Instance(new SpawnSystem(spawnAmount: 20))
+				.New<DamageSystem>()
+				.New<HealingBuffSystem>()
+				.New<DeathSystem>()
+				.Build(new World());
 
-			_damageFeature.Run<IInitinalize>();
+			_systems.Run<IInitinalize>();
 		}
 
 		public void UpdateLoop(int tick)
 		{
 			if (tick == 0)
 			{
-				_damageFeature.Run<IFirstTick>();
+				_systems.Run<IFirstTick>();
 			}
 
-			_damageFeature.Run<IUpdate>();
+			var deltaTime = 1f / 60;
+
+			_systems.Run<IUpdate, float>(deltaTime);
 		}
 	}
 }
