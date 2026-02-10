@@ -2,85 +2,84 @@
 {
 	public class ViewSynchronizer<TView> where TView : IEntityView
 	{
-		private readonly DataSet<ViewInstance<TView>> _viewInstances = new DataSet<ViewInstance<TView>>();
-		private readonly World _world;
 		private readonly IViewFactory<TView> _viewFactory;
 
-		public ViewSynchronizer(World world, IViewFactory<TView> viewFactory)
+		public DataSet<ViewInstance<TView>> ViewInstances { get; } = new DataSet<ViewInstance<TView>>();
+
+		public ViewSynchronizer(IViewFactory<TView> viewFactory)
 		{
-			_world = world;
 			_viewFactory = viewFactory;
 		}
 
-		public void SynchronizeAll()
+		public void SynchronizeAll(World world)
 		{
-			var viewAssets = _world.DataSet<ViewAsset>();
+			var viewAssets = world.DataSet<ViewAsset>();
 
-			foreach (var id in _viewInstances)
+			foreach (var id in ViewInstances)
 			{
-				var viewInstance = _viewInstances.Get(id);
+				var viewInstance = ViewInstances.Get(id);
 				if (!viewAssets.Has(id) || !viewAssets.Get(id).Equals(viewInstance.Asset))
 				{
-					RemoveViewInstance(id, viewInstance);
+					DestroyViewInstance(id, viewInstance);
 				}
 			}
 
 			foreach (var id in viewAssets)
 			{
 				var viewAsset = viewAssets.Get(id);
-				if (!_viewInstances.Has(id))
+				if (!ViewInstances.Has(id))
 				{
-					AssignViewInstance(viewAsset, id);
+					CreateViewInstance(viewAsset, world.GetEntity(id));
 				}
 			}
 		}
 
-		public void SynchronizeSingle(int entityId)
+		public void SynchronizeSingle(Entity entity)
 		{
-			var viewAsset = _world.Get<ViewAsset>(entityId);
+			var viewAsset = entity.Get<ViewAsset>();
 
-			if (_viewInstances.Has(entityId))
+			if (ViewInstances.Has(entity.Id))
 			{
-				var viewInstance = _viewInstances.Get(entityId);
+				var viewInstance = ViewInstances.Get(entity.Id);
 
-				// If instance is alright, nothing to be done
+				// If instance is alright, nothing to be done.
 				if (viewInstance.Asset.Equals(viewAsset))
 				{
 					return;
 				}
 				else
 				{
-					RemoveViewInstance(entityId, viewInstance);
+					DestroyViewInstance(entity.Id, viewInstance);
 				}
 			}
 
-			AssignViewInstance(viewAsset, entityId);
+			CreateViewInstance(viewAsset, entity);
 		}
 
-		public void DestroyView(int entityId)
+		private void DestroyView(int entityId)
 		{
-			if (_viewInstances.Has(entityId))
+			if (ViewInstances.Has(entityId))
 			{
-				RemoveViewInstance(entityId, _viewInstances.Get(entityId));
+				DestroyViewInstance(entityId, ViewInstances.Get(entityId));
 			}
 		}
 
-		private void AssignViewInstance(ViewAsset viewAsset, int entityId)
+		private void CreateViewInstance(ViewAsset viewAsset, Entity entity)
 		{
 			var view = _viewFactory.CreateView(viewAsset);
 
-			view.AssignEntity(_world.GetEntity(entityId));
+			view.AssignEntity(entity);
 
-			_viewInstances.Set(entityId, new ViewInstance<TView>() { Instance = view, Asset = viewAsset });
+			ViewInstances.Set(entity.Id, new ViewInstance<TView>() { Instance = view, Asset = viewAsset });
 		}
 
-		private void RemoveViewInstance(int entityId, ViewInstance<TView> viewInstance)
+		private void DestroyViewInstance(int entityId, ViewInstance<TView> viewInstance)
 		{
 			viewInstance.Instance.RemoveEntity();
 
 			_viewFactory.DestroyView(viewInstance.Instance);
 
-			_viewInstances.Remove(entityId);
+			ViewInstances.Remove(entityId);
 		}
 	}
 }
