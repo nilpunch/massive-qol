@@ -1,4 +1,4 @@
-﻿namespace Massive.Unity
+﻿namespace Massive.QoL
 {
 	public interface IVariantPool<TVariant, TItem> : IPoolReturn<TItem>
 	{

@@ -1,4 +1,4 @@
-﻿namespace Massive.Unity
+﻿namespace Massive.QoL
 {
 	/// <summary>
 	/// Adapter from VariantPool to basic Pool.

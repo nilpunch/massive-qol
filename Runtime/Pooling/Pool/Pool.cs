@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Massive.Unity
+namespace Massive.QoL
 {
 	public class Pool<TItem> : IPool<TItem>
 	{

@@ -1,4 +1,4 @@
-﻿namespace Massive.Unity
+﻿namespace Massive.QoL
 {
 	public interface IPool<TItem> : IPoolReturn<TItem>
 	{

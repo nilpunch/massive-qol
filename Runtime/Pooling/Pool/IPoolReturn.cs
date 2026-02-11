@@ -1,7 +1,7 @@
-﻿namespace Massive.Unity
+﻿namespace Massive.QoL
 {
 	public interface IPoolReturn<in TItem>
 	{
-		public void Return(TItem item);
+		void Return(TItem item);
 	}
 }
