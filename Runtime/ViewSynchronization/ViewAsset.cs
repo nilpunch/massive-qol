@@ -6,7 +6,7 @@ namespace Massive.QoL
 	[Serializable, Component]
 	public struct ViewAsset : IEquatable<ViewAsset>
 	{
-		public int IdMinusOne;
+		public int IdPlusOne;
 
 		/// <summary>
 		/// Negative view ID is invalid.
@@ -14,20 +14,32 @@ namespace Massive.QoL
 		public int Id
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			get => IdMinusOne + 1;
+			get => IdPlusOne - 1;
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			set => IdMinusOne = value - 1;
+			set => IdPlusOne = value + 1;
 		}
 
 		public ViewAsset(int id)
 		{
-			IdMinusOne = id - 1;
+			IdPlusOne = id + 1;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool operator ==(ViewAsset a, ViewAsset b)
+		{
+			return a.Equals(b);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool operator !=(ViewAsset a, ViewAsset b)
+		{
+			return !(a == b);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Equals(ViewAsset other)
 		{
-			return IdMinusOne == other.IdMinusOne;
+			return IdPlusOne == other.IdPlusOne;
 		}
 
 		public override bool Equals(object obj)
@@ -37,7 +49,7 @@ namespace Massive.QoL
 
 		public override int GetHashCode()
 		{
-			return IdMinusOne;
+			return IdPlusOne;
 		}
 	}
 }
