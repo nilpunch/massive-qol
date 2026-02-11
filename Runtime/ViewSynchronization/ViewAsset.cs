@@ -3,19 +3,31 @@ using System.Runtime.CompilerServices;
 
 namespace Massive.QoL
 {
+	[Serializable, Component]
 	public struct ViewAsset : IEquatable<ViewAsset>
 	{
-		public int Id;
+		public int IdMinusOne;
+
+		/// <summary>
+		/// Negative view ID is invalid.
+		/// </summary>
+		public int Id
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get => IdMinusOne + 1;
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			set => IdMinusOne = value - 1;
+		}
 
 		public ViewAsset(int id)
 		{
-			Id = id;
+			IdMinusOne = id - 1;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Equals(ViewAsset other)
 		{
-			return Id == other.Id;
+			return IdMinusOne == other.IdMinusOne;
 		}
 
 		public override bool Equals(object obj)
@@ -25,7 +37,7 @@ namespace Massive.QoL
 
 		public override int GetHashCode()
 		{
-			return Id;
+			return IdMinusOne;
 		}
 	}
 }
