@@ -7,7 +7,7 @@ namespace Massive.QoL
 	{
 		public readonly bool StoreEmptyTypesAsDataSets;
 
-		public StaticWorldTypeAttribute(int pageSize = Constants.PageSize, bool storeEmptyTypesAsDataSets = false)
+		public StaticWorldTypeAttribute(bool storeEmptyTypesAsDataSets = false)
 		{
 			StoreEmptyTypesAsDataSets = storeEmptyTypesAsDataSets;
 		}

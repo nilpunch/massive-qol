@@ -1,8 +1,13 @@
-﻿using UnityEngine;
-
-namespace Massive.QoL
+﻿namespace Massive.QoL
 {
-	public class StaticWorldSelectorAttribute : PropertyAttribute
+#if UNITY_EDITOR
+	public class StaticWorldSelectorAttribute : UnityEngine.PropertyAttribute
 	{
 	}
+#else
+	[System.AttributeUsage(System.AttributeTargets.Field)]
+	public class StaticWorldSelectorAttribute : System.Attribute
+	{
+	}
+#endif
 }
