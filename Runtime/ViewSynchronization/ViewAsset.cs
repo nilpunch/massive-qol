@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Massive.QoL
 {
-	[Serializable, Component]
+	[Serializable]
 	public struct ViewAsset : IEquatable<ViewAsset>
 	{
 		public int IdPlusOne;
