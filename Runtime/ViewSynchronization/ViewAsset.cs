@@ -19,6 +19,12 @@ namespace Massive.QoL
 			set => IdPlusOne = value + 1;
 		}
 
+		public bool IsValid
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get => Id >= 0;
+		}
+
 		public ViewAsset(int id)
 		{
 			IdPlusOne = id + 1;
